@@ -90,7 +90,7 @@ public class PeliculasController : ControllerBase
         return CreatedAtRoute("GetPelicula", new { peliculaId = pelicula.Id }, pelicula);
     }
     
-    [HttpPatch("{PeliculaId:int}", Name = "ActualizarPatchPelicula")]
+    [HttpPatch("{peliculaId:int}", Name = "ActualizarPatchPelicula")]
     [ProducesResponseType(204)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -115,6 +115,67 @@ public class PeliculasController : ControllerBase
         }
 
         return NoContent();
+    }
+    
+    [HttpDelete("{peliculaId:int}", Name = "BorrarPelicula")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public IActionResult BorrarPelicula(int peliculaId)
+    {
+        if (!_pelRepo.ExistePelicula(peliculaId))
+        {
+            return NotFound();
+        }
+        
+        var pelicula = _pelRepo.GetPelicula(peliculaId);
+        if (!_pelRepo.EliminarPelicula(pelicula))
+        {
+            ModelState.AddModelError("", $"Algo salio mal borrando el registro {pelicula.Nombre}");
+            return StatusCode(500, ModelState);
+        }
+
+        return NoContent();
+    }
+    
+    [HttpGet("GetPeliculasByCategory/{categoriaId:int}")]
+    public IActionResult GetPeliculasByCategory(int categoriaId)
+    {
+        var listPeliculas = _pelRepo.GetPeliculaByCategory(categoriaId);
+
+        if (listPeliculas == null)
+        {
+            return NotFound();
+        }
+        
+        var itemPelicula = new List<PeliculaDto>();
+
+        foreach (var item in listPeliculas)
+        {
+            itemPelicula.Add(_mapper.Map<PeliculaDto>(item));
+        }
+
+        return Ok(itemPelicula);
+    }
+    
+    [HttpGet("Search")]
+    public IActionResult GetPeliculaByName(string name)
+    {
+        try
+        {
+            var result = _pelRepo.GetPeliculaByName(name.Trim());
+            if (result.Any())
+            {
+                return Ok(result);
+            }
+
+            return NotFound();
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "Error recuperando datos")
+        }
     }
     
 }
