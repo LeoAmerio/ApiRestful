@@ -110,7 +110,7 @@ public class PeliculasController : ControllerBase
 
         if (!_pelRepo.ActualizarPelicula(pelicula))
         {
-            ModelState.AddModelError("", $"Algo salio mal actualizando el registro {pelicula.Nombre}");
+            ModelState.AddModelError("", $"Algo salio mal actualizando el registro {pelicula.Name}");
             return StatusCode(500, ModelState);
         }
 
@@ -132,7 +132,7 @@ public class PeliculasController : ControllerBase
         var pelicula = _pelRepo.GetPelicula(peliculaId);
         if (!_pelRepo.EliminarPelicula(pelicula))
         {
-            ModelState.AddModelError("", $"Algo salio mal borrando el registro {pelicula.Nombre}");
+            ModelState.AddModelError("", $"Algo salio mal borrando el registro {pelicula.Name}");
             return StatusCode(500, ModelState);
         }
 
@@ -174,7 +174,7 @@ public class PeliculasController : ControllerBase
         }
         catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, "Error recuperando datos")
+            return StatusCode(StatusCodes.Status500InternalServerError, "Error recuperando datos");
         }
     }
     
