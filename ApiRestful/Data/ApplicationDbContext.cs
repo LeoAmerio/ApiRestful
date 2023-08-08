@@ -13,4 +13,5 @@ public class ApplicationDbContext : DbContext
     //Agregar modelos debajo
     public DbSet<Category> Categorias { get; set; }
     public DbSet<Pelicula> Pelicula { get; set; }
+    public DbSet<Usuario> Usuario { get; set; }
 }
