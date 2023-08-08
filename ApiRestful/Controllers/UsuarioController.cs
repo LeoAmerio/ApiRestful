@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 using WebApplication1.Models.DTOs;
@@ -26,7 +22,9 @@ namespace WebApplication1.Controllers
             _mapper = mapper;
         }
         
+        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetUsuarios()
@@ -35,7 +33,7 @@ namespace WebApplication1.Controllers
 
             var listaUsuariosDto = new List<UsuarioDto>();
 
-            foreach (var lista in listaUsuariosDto)
+            foreach (var lista in listaUsuarios)
             {
                 listaUsuariosDto.Add(_mapper.Map<UsuarioDto>(lista));
             }
@@ -43,10 +41,12 @@ namespace WebApplication1.Controllers
             return Ok(listaUsuariosDto);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{usuarioId:int}", Name = "GetUsuario")]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetUsuario(int usuarioId)
         {
@@ -62,6 +62,7 @@ namespace WebApplication1.Controllers
             return Ok(itemUsuarioDto);
         }
 
+        [AllowAnonymous]
         [HttpPost("registro")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -91,6 +92,7 @@ namespace WebApplication1.Controllers
             return Ok(_respuestaApi);
         }
         
+        [AllowAnonymous]
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -112,6 +114,5 @@ namespace WebApplication1.Controllers
             _respuestaApi.Result = respuestaLogin;
             return Ok(_respuestaApi);
         }
-        
     }
 }

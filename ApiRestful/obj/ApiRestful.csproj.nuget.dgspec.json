@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lamerio\\RiderProjects\\WebApplication1\\ApiRestful\\ApiRestful.csproj": {}
+    "C:\\Users\\Usuario\\Documents\\ApiRestful\\ApiRestful\\ApiRestful.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lamerio\\RiderProjects\\WebApplication1\\ApiRestful\\ApiRestful.csproj": {
+    "C:\\Users\\Usuario\\Documents\\ApiRestful\\ApiRestful\\ApiRestful.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lamerio\\RiderProjects\\WebApplication1\\ApiRestful\\ApiRestful.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\ApiRestful\\ApiRestful\\ApiRestful.csproj",
         "projectName": "ApiRestful",
-        "projectPath": "C:\\Users\\lamerio\\RiderProjects\\WebApplication1\\ApiRestful\\ApiRestful.csproj",
-        "packagesPath": "C:\\Users\\lamerio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lamerio\\RiderProjects\\WebApplication1\\ApiRestful\\obj\\",
+        "projectPath": "C:\\Users\\Usuario\\Documents\\ApiRestful\\ApiRestful\\ApiRestful.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Documents\\ApiRestful\\ApiRestful\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\lamerio\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,9 +22,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/architecture-it/index.json": {}
         },
         "frameworks": {
           "net7.0": {
@@ -53,6 +49,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.10, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
